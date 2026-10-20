@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Audio Calling</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="panel">
+      <header>
+        <p class="eyebrow">PEER-TO-PEER</p>
+        <h1>Audio calling</h1>
+        <p class="subtitle">Join and talk directly with someone online.</p>
+      </header>
+
+      <form id="join-form" class="join-form">
+        <label for="name">Your name</label>
+        <div class="join-row">
+          <input id="name" name="name" maxlength="32" autocomplete="name" required placeholder="Enter your name">
+          <button type="submit">Join</button>
+        </div>
+      </form>
+
+      <section id="lobby" class="lobby" hidden>
+        <div class="section-heading">
+          <h2>People online</h2>
+          <span id="online-count" class="count">0</span>
+        </div>
+        <p id="empty-state" class="empty-state">No one else is online yet.</p>
+        <ul id="users" class="user-list"></ul>
+      </section>
+
+      <section id="call-panel" class="call-panel" aria-live="polite" hidden>
+        <p id="call-status" class="call-status">Call status</p>
+        <div id="voice-indicator" class="voice-indicator" hidden>
+          <div class="voice-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="9" y="2" width="6" height="12" rx="3" stroke="currentColor" stroke-width="2"/>
+              <path d="M5 11a7 7 0 0 0 14 0M12 18v4m-4 0h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="voice-details">
+            <span class="voice-label">Voice call in progress</span>
+            <span id="call-duration" class="call-duration">00:00</span>
+          </div>
+          <div class="voice-waves" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+        <div id="incoming-actions" class="actions" hidden>
+          <button id="accept-call" type="button">Accept</button>
+          <button id="decline-call" class="secondary" type="button">Decline</button>
+        </div>
+        <button id="end-call" class="secondary" type="button" hidden>End call</button>
+      </section>
+
+      <p id="notice" class="notice" role="status" aria-live="polite"></p>
+      <audio id="remote-audio" autoplay></audio>
+      <audio id="local-audio" autoplay muted></audio>
+    </main>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
